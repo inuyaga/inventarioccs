@@ -1,89 +1,116 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
 	<meta charset="utf-8">
-	<title>Welcome to CodeIgniter</title>
-
-	<style type="text/css">
-
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
-
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
-
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
-
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
-
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
-
-	#body {
-		margin: 0 15px 0 15px;
-	}
-
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
-
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+	<meta name="author" content="Creative Tim">
+	<title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+	<!-- Favicon -->
+	<link href="<?=base_url('publico')?>/assets/img/brand/favicon.png" rel="icon" type="image/png">
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<!-- Icons -->
+	<link href="<?=base_url('publico')?>/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+	<link href="<?=base_url('publico')?>/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+	<!-- Argon CSS -->
+	<link type="text/css" href="<?=base_url('publico')?>/assets/css/argon.css?v=1.0.0" rel="stylesheet">
 </head>
-<body>
 
-<div id="container">
-	<h1>Welcome to CodeIgniter!</h1>
+<body class="bg-default">
+	<div class="main-content">
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+		<!-- Header -->
+		<div class="header bg-gradient-primary py-7 py-lg-8">
+			<div class="container">
+				<div class="header-body text-center mb-7">
+					<div class="row justify-content-center">
+						<div class="col-lg-5 col-md-6">
+							<h1 class="text-white">Bienvenido</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="separator separator-bottom separator-skew zindex-100">
+				<svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+				</svg>
+			</div>
+		</div>
+		<!-- Page content -->
+		<div class="container mt--8 pb-5">
+			<div class="row justify-content-center">
+				<div class="col-lg-5 col-md-7">
+					<div class="card bg-secondary shadow border-0">
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
+						<div class="card-body px-lg-5 py-lg-5">
+							<div class="text-center text-muted mb-4">
+								<small>Ingresar</small>
+							</div>
+							<form role="form">
+								<div class="form-group mb-3">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="ni ni-email-83"></i></span>
+										</div>
+										<input class="form-control" placeholder="Usuario" type="text">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="input-group input-group-alternative">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+										</div>
+										<input class="form-control" placeholder="Contraseña" type="password">
+									</div>
+								</div>
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
+								<div class="text-center">
+									<button type="button" class="btn btn-primary my-4">Entrar</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
-
+	<!-- Footer -->
+	<footer class="py-5">
+		<div class="container">
+			<div class="row align-items-center justify-content-xl-between">
+				<div class="col-xl-6">
+					<div class="copyright text-center text-xl-left text-muted">
+						&copy; 2018 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+					</div>
+				</div>
+				<div class="col-xl-6">
+					<ul class="nav nav-footer justify-content-center justify-content-xl-end">
+						<li class="nav-item">
+							<a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+						</li>
+						<li class="nav-item">
+							<a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+						</li>
+						<li class="nav-item">
+							<a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+						</li>
+						<li class="nav-item">
+							<a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT
+								License</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Argon Scripts -->
+	<!-- Core -->
+	<script src="<?=base_url('publico')?>/assets/vendor/jquery/dist/jquery.min.js"></script>
+	<script src="<?=base_url('publico')?>/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Argon JS -->
+	<script src="<?=base_url('publico')?>/assets/js/argon.js?v=1.0.0"></script>
 </body>
+
 </html>
