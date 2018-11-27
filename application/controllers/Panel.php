@@ -83,7 +83,7 @@ class Panel extends CI_Controller
                         <tr>
                         <th scope="row">' . $key->P_CodeProduct . '</th>
                         <td>' . $key->P_Description . '</td>
-                        <td>' . $key->P_Description . '</td>
+                        <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/captura_prod/') . $key->P_CodeProduct . '" role="button">Capturar</a></td>
                       </tr>
                         ';
             }
@@ -93,6 +93,11 @@ class Panel extends CI_Controller
                   </table>
                     ';
         }
+
+    }
+
+    public function captura_prod($id)
+    {
 
     }
 

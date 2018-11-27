@@ -55,7 +55,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
             <div class=" dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Bienvenido! <?=  $this->session->userdata('usuario') ?></h6>
+              <h6 class="text-overflow m-0">Bienvenido! <?=$this->session->userdata('usuario')?></h6>
             </div>
             <div class="dropdown-divider"></div>
             <a href="<?=base_url('Panel/salir')?>" class="dropdown-item">
@@ -174,7 +174,7 @@
 
 
     <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+    <div class="header bg-gradient-primary pb-1 pt-2 pt-md-7">
       <div class="container-fluid">
         <div class="header-body">
 

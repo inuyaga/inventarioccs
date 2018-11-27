@@ -51,10 +51,10 @@
           </a>
           <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
             <div class=" dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Bienvenido!<?=  $this->session->usuario ?></h6>
+              <h6 class="text-overflow m-0">Bienvenido!<?=$this->session->usuario?></h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a href="<?= base_url('Panel/salir') ?>" class="dropdown-item">
+            <a href="<?=base_url('Panel/salir')?>" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Salir</span>
             </a>
@@ -95,22 +95,22 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel') ?>">
+            <a class="nav-link" href="<?=base_url('Panel')?>">
               <i class="ni ni-tv-2 text-primary"></i> Admin
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/captura') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/captura')?>">
               <i class="ni ni-pin-3 text-orange"></i> Captura
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/usuarios') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/usuarios')?>">
               <i class="ni ni-single-02 text-yellow"></i> Usuarios
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/supervisor') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/supervisor')?>">
               <i class="ni ni-circle-08 text-pink"></i> Supervisor
             </a>
           </li>
@@ -148,7 +148,7 @@
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold">
-                    <?= $this->session->userdata('usuario') ?></span>
+                    <?=$this->session->userdata('usuario')?></span>
                 </div>
               </div>
             </a>
@@ -158,7 +158,7 @@
               </div>
 
               <div class="dropdown-divider"></div>
-              <a href="<?= base_url('Panel/salir') ?>" class="dropdown-item">
+              <a href="<?=base_url('Panel/salir')?>" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Salir!</span>
               </a>
@@ -169,8 +169,8 @@
     </nav>
 
 
-    <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+   <!-- Header -->
+   <div class="header bg-gradient-primary pb-1 pt-2 pt-md-7">
       <div class="container-fluid">
         <div class="header-body">
 
@@ -178,7 +178,7 @@
       </div>
     </div>
 
-  <form role="form" action="<?= base_url('Welcome/GuardarUsuario') ?>" method="POST">
+  <form role="form" action="<?=base_url('Welcome/GuardarUsuario')?>" method="POST">
     <div class="form-group mb-3">
       <div class="input-group input-group-alternative">
         <div class="input-group-prepend">
@@ -228,14 +228,13 @@
       <button type="submit" class="btn btn-primary my-4">Guardar cambios</button>
     </div>
     <?php
-    if(isset($_SESSION['mensajes_form']) && !empty($_SESSION['mensajes_form']))
-    {
-  ?>
-  <h2><?= $_SESSION['mensajes_form'] ?></h2>
+if (isset($_SESSION['mensajes_form']) && !empty($_SESSION['mensajes_form'])) {
+    ?>
+  <h2><?=$_SESSION['mensajes_form']?></h2>
   <?php
-    }
+}
 
-  ?>
+?>
     <div class="pb-8 pt-5 pt-md-8">
         <table class="table table-striped">
           <thead>
@@ -245,19 +244,19 @@
               <td><b>Contraseña</b></td>
               <td><b>Nivel</b></td>
             </tr>
-          </thead>  
+          </thead>
           <?php
-          foreach ($lista->result() as $key => $data) {
-          ?>
+foreach ($lista->result() as $key => $data) {
+    ?>
           <tr>
-            <td><?= $data->user_usuario ?></td>
-            <td><?= $data->user_nombre ?></td>
-            <td><?= $data->user_pass ?></td>
-            <td><?= $data->user_nivel ?></td>
+            <td><?=$data->user_usuario?></td>
+            <td><?=$data->user_nombre?></td>
+            <td><?=$data->user_pass?></td>
+            <td><?=$data->user_nivel?></td>
           </tr>
           <?php
-        }
-          ?>
+}
+?>
         </table>
       </div>
   </form>
