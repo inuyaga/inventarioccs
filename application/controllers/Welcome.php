@@ -27,6 +27,8 @@ class Welcome extends CI_Controller
                 'ID' => $key->user_ID,
                 'usuario' => $key->user_usuario,
                 'nombre' => $key->user_nombre,
+                'nivel_user' => $key->user_nivel,
+                'logueado' => true,
             );
 
             $this->session->set_userdata($usuario);

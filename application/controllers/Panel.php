@@ -7,7 +7,14 @@ class Panel extends CI_Controller
 
     public function index()
     {
-        $this->load->view('panel');
+        if ($this->session->userdata('logueado') && $this->session->userdata('nivel_user') == 1) {
+            $this->load->view('panel');
+        } elseif ($this->session->userdata('logueado')) {
+            redirect('Panel/Captura', 'refresh');
+        } else {
+            redirect('', 'refresh');
+        }
+
     }
 
     public function salir()
@@ -20,15 +27,31 @@ class Panel extends CI_Controller
 
     public function Captura()
     {
-
+        if ($this->session->userdata('logueado')) {
+            $this->load->view('panel');
+        } else {
+            redirect('', 'refresh');
+        }
     }
     public function Usuarios()
     {
+        if ($this->session->userdata('logueado') && $this->session->userdata('nivel_user') == 1) {
 
+        } elseif ($this->session->userdata('logueado')) {
+            redirect('Panel/Captura', 'refresh');
+        } else {
+            redirect('', 'refresh');
+        }
     }
     public function Supervisor()
     {
+        if ($this->session->userdata('logueado') && ($this->session->userdata('nivel_user') == 2 || $this->session->userdata('nivel_user') == 1)) {
 
+        } elseif ($this->session->userdata('logueado')) {
+            redirect('Panel/Captura', 'refresh');
+        } else {
+            redirect('', 'refresh');
+        }
     }
 
 }
