@@ -10,6 +10,7 @@ class Panel extends CI_Controller
         parent::__construct();
         $this->load->model('M_consultas');
         $this->load->model('M_Altas');
+        $this->load->model('M_update');
     }
     public function index()
     {
@@ -74,6 +75,9 @@ class Panel extends CI_Controller
             <tr>
               <th scope="col">Codigo Producto</th>
               <th scope="col">Descripcion</th>
+              <th scope="col">Localizacion</th>
+              <th scope="col">Unidad</th>
+              <th scope="col">Resguardo</th>
               <th scope="col">Accion</th>
             </tr>
           </thead>
@@ -83,6 +87,9 @@ class Panel extends CI_Controller
                         <tr>
                         <th scope="row">' . $key->P_CodeProduct . '</th>
                         <td>' . $key->P_Description . '</td>
+                        <td>' . $key->P_Localizacion . '</td>
+                        <td>' . $key->P_Unidad . '</td>
+                        <td>' . $key->P_Resguardo . '</td>
                         <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/captura_prod/') . $key->P_CodeProduct . '" role="button">Capturar</a></td>
                       </tr>
                         ';
@@ -98,6 +105,37 @@ class Panel extends CI_Controller
 
     public function captura_prod($id)
     {
+        if ($this->session->userdata('logueado')) {
+            $data['id'] = $id;
+            $this->load->view('captura_real', $data);
+
+        } else {
+            redirect('', 'refresh');
+        }
+    }
+
+    public function set_caprura_prod()
+    {
+        $id = $this->input->post('id');
+        $conteo1 = $this->input->post('conteo1');
+
+        $afectado = $this->M_update->set_conteo($id, $conteo1);
+        if ($afectado > 0) {
+            $this->session->set_flashdata('mensaje', '
+            <div class="alert alert-success" role="alert">
+            Actualizado correctamente
+            </div>
+            ');
+
+        } else {
+            $this->session->set_flashdata('mensaje', '
+            <div class="alert alert-danger" role="alert">
+            Error al intentar guardar
+            </div>
+            ');
+        }
+
+        redirect('Panel/Captura', 'refresh');
 
     }
 

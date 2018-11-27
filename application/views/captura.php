@@ -103,7 +103,7 @@
               <i class="ni ni-tv-2 text-primary"></i> Admin
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="<?=base_url('Panel/captura')?>">
               <i class="ni ni-pin-3 text-orange"></i> Captura
             </a>
@@ -184,6 +184,12 @@
       </div>
     </div>
 
+    <?php
+if ($this->session->flashdata('mensaje')) {
+    echo $this->session->flashdata('mensaje');
+}
+?>
+
     <div id="resultadoBusqueda"></div>
 
 
@@ -191,7 +197,7 @@
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="<?=base_url('publico')?>/assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="<?= base_url('publico/js/jquery.validate.js') ?>"></script>
+  <script type="text/javascript" src="<?=base_url('publico/js/jquery.validate.js')?>"></script>
   <script src="<?=base_url('publico')?>/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Optional JS -->
   <script src="<?=base_url('publico')?>/assets/vendor/chart.js/dist/Chart.min.js"></script>
@@ -207,7 +213,7 @@
     // function buscar() {
     //   var textoBusqueda = $("input#busqueda").val();
 
-    //   $.post("<?= base_url('Panel/buscar') ?>",
+    //   $.post("<?=base_url('Panel/buscar')?>",
     //     {
     //       valorBusqueda: textoBusqueda,
     //     },
@@ -226,13 +232,13 @@
 
       },
       messages: {
-        busqueda: "Debe introducir nombre de la materia.",
+        busqueda: "Escriba texto a buscar",
 
 
       },
       submitHandler: function (form) {
 
-        $.post("<?= base_url('Panel/buscar') ?>",
+        $.post("<?=base_url('Panel/buscar')?>",
           {
             valorBusqueda: $('#busqueda').val()
           },

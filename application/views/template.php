@@ -172,9 +172,8 @@
       </div>
     </nav>
 
-
-    <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+<!-- Header -->
+<div class="header bg-gradient-primary pb-1 pt-2 pt-md-7">
       <div class="container-fluid">
         <div class="header-body">
 
