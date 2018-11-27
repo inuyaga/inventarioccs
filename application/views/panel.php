@@ -28,7 +28,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./index.html">
+      <a class="navbar-brand pt-0" href="#">
         <img src="<?=base_url('publico/img/')?>computel.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
@@ -58,7 +58,7 @@
               <h6 class="text-overflow m-0">Bienvenido!</h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a href="<?= base_url('Panel/salir') ?>" class="dropdown-item">
+            <a href="<?=base_url('Panel/salir')?>" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Salir</span>
             </a>
@@ -99,22 +99,22 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel') ?>">
+            <a class="nav-link" href="<?=base_url('Panel')?>">
               <i class="ni ni-tv-2 text-primary"></i> Admin
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/captura') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/captura')?>">
               <i class="ni ni-pin-3 text-orange"></i> Captura
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/usuarios') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/usuarios')?>">
               <i class="ni ni-single-02 text-yellow"></i> Usuarios
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/supervisor') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/supervisor')?>">
               <i class="ni ni-circle-08 text-pink"></i> Supervisor
             </a>
           </li>
@@ -152,7 +152,7 @@
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold">
-                    <?= $this->session->userdata('usuario') ?></span>
+                    <?=$this->session->userdata('usuario')?></span>
                 </div>
               </div>
             </a>
@@ -162,7 +162,7 @@
               </div>
 
               <div class="dropdown-divider"></div>
-              <a href="<?= base_url('Panel/salir') ?>" class="dropdown-item">
+              <a href="<?=base_url('Panel/salir')?>" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Salir!</span>
               </a>

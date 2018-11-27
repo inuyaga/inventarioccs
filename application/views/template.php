@@ -28,7 +28,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="./index.html">
+      <a class="navbar-brand pt-0" href="#">
         <img src="<?=base_url('publico/img/')?>computel.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->

@@ -28,7 +28,7 @@ class Panel extends CI_Controller
     public function Captura()
     {
         if ($this->session->userdata('logueado')) {
-            $this->load->view('panel');
+
         } else {
             redirect('', 'refresh');
         }
