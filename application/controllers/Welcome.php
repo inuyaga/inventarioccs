@@ -8,7 +8,7 @@ class Welcome extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_consultas');
-
+        $this->load->model('M_Altas');
     }
 
     public function index()
@@ -39,6 +39,21 @@ class Welcome extends CI_Controller
 
         redirect('Welcome', 'refresh');
 
+    }
+
+    public function GuardarUsuario()
+    {
+        $marca=array(
+            'usuario' => $this->input->post('usuario'),
+            'usuario2' => $this->input->post('usuario2'),
+            'pass' => $this->input->post('pass'),
+            'repass' => $this->input->post('repass'),
+            'Tipo' => $this->input->post('Tipo'),
+        );
+        $this->session->set_flashdata('mensajes_form', $this->M_Altas->IngresarUsuario($marca)['mensaje']);
+        
+        redirect('Panel/Usuarios','refresh');
+        
     }
 
 }

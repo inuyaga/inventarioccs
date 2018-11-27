@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Panel</title>
-  <!-- Favicon -->
+  <title>Usuarios</title>
   <link href="<?=base_url('publico')?>/assets/img/brand/favicon.png" rel="icon" type="image/png">
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-  <!-- Icons -->
   <link href="<?=base_url('publico')?>/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
   <link href="<?=base_url('publico')?>/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-  <!-- Argon CSS -->
   <link type="text/css" href="<?=base_url('publico')?>/assets/css/argon.css?v=1.0.0" rel="stylesheet">
 </head>
 
@@ -55,7 +51,7 @@
           </a>
           <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
             <div class=" dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Bienvenido! <?=  $this->session->userdata('usuario') ?></h6>
+              <h6 class="text-overflow m-0">Bienvenido!<?=  $this->session->usuario ?></h6>
             </div>
             <div class="dropdown-divider"></div>
             <a href="<?= base_url('Panel/salir') ?>" class="dropdown-item">
@@ -182,7 +178,92 @@
       </div>
     </div>
 
+  <form role="form" action="<?= base_url('Welcome/GuardarUsuario') ?>" method="POST">
+    <div class="form-group mb-3">
+      <div class="input-group input-group-alternative">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+        </div>
+        <input class="form-control" placeholder="Usuario" name="usuario" type="text" required>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <div class="input-group input-group-alternative">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+        </div>
+        <input class="form-control" placeholder="Nombre Completo de Usuario" name="usuario2" type="text" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group input-group-alternative">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+        </div>
+        <input class="form-control" placeholder="Contraseña" name="pass" type="password" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group input-group-alternative">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+        </div>
+        <input class="form-control" placeholder="Repite la Contraseña" name="repass" type="password" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group input-group-alternative">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+        </div>
+        <select name="Tipo" id="Tipo">
+          <option value="1">Administrador</option>
+          <option value="2">Supervisor</option>
+          <option value="3">Capturista</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary my-4">Guardar cambios</button>
+    </div>
+    <?php
+    if(isset($_SESSION['mensajes_form']) && !empty($_SESSION['mensajes_form']))
+    {
+  ?>
+  <h2><?= $_SESSION['mensajes_form'] ?></h2>
+  <?php
+    }
+
+  ?>
+    <div class="pb-8 pt-5 pt-md-8">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td><b>Usuario</b></td>
+              <td><b>Nombre</b></td>
+              <td><b>Contraseña</b></td>
+              <td><b>Nivel</b></td>
+            </tr>
+          </thead>  
+          <?php
+          foreach ($lista->result() as $key => $data) {
+          ?>
+          <tr>
+            <td><?= $data->user_usuario ?></td>
+            <td><?= $data->user_nombre ?></td>
+            <td><?= $data->user_pass ?></td>
+            <td><?= $data->user_nivel ?></td>
+          </tr>
+          <?php
+        }
+          ?>
+        </table>
+      </div>
+  </form>
   </div>
+  <hr>
+
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="<?=base_url('publico')?>/assets/vendor/jquery/dist/jquery.min.js"></script>
