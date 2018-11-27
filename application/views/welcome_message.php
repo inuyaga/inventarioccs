@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
 	<meta name="author" content="Creative Tim">
-	<title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+	<title>Inicio Sesion</title>
 	<!-- Favicon -->
 	<link href="<?=base_url('publico')?>/assets/img/brand/favicon.png" rel="icon" type="image/png">
 	<!-- Fonts -->
@@ -48,13 +48,13 @@
 							<div class="text-center text-muted mb-4">
 								<small>Ingresar</small>
 							</div>
-							<form role="form">
+							<form role="form" action="<?= base_url('Welcome/iniciosesion') ?>" method="POST">
 								<div class="form-group mb-3">
 									<div class="input-group input-group-alternative">
 										<div class="input-group-prepend">
 											<span class="input-group-text"><i class="ni ni-email-83"></i></span>
 										</div>
-										<input class="form-control" placeholder="Usuario" type="text">
+										<input class="form-control" placeholder="Usuario" name="usuario" type="text">
 									</div>
 								</div>
 								<div class="form-group">
@@ -62,12 +62,12 @@
 										<div class="input-group-prepend">
 											<span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
 										</div>
-										<input class="form-control" placeholder="Contraseña" type="password">
+										<input class="form-control" placeholder="Contraseña" name="pass" type="password">
 									</div>
 								</div>
 
 								<div class="text-center">
-									<button type="button" class="btn btn-primary my-4">Entrar</button>
+									<button type="submit" class="btn btn-primary my-4">Entrar</button>
 								</div>
 							</form>
 						</div>
