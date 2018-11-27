@@ -10,6 +10,27 @@ class Panel extends CI_Controller
         $this->load->view('panel');
     }
 
+    public function salir()
+    {
+        $this->session->sess_destroy();
+
+        redirect('', 'refresh');
+
+    }
+
+    public function Captura()
+    {
+
+    }
+    public function Usuarios()
+    {
+
+    }
+    public function Supervisor()
+    {
+
+    }
+
 }
 
 /* End of file Panel.php */
