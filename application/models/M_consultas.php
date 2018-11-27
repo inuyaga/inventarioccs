@@ -21,6 +21,19 @@ class M_consultas extends CI_Model
         return $this->db->get();
 
     }
+
+    public function buscarProd($busqueda)
+    {
+        $this->db->select('*');
+        $this->db->from('Productos');
+
+        $this->db->or_like('P_Description', $busqueda);
+        $this->db->or_like('P_CodeProduct', $busqueda);
+        $this->db->or_like('P_Cbarras', $busqueda);
+
+        return $this->db->get();
+
+    }
 }
 
 /* End of file M_consultas.php */

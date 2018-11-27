@@ -34,6 +34,7 @@ class Panel extends CI_Controller
     public function Captura()
     {
         if ($this->session->userdata('logueado')) {
+            $this->load->view('captura');
 
         } else {
             redirect('', 'refresh');
@@ -43,7 +44,7 @@ class Panel extends CI_Controller
     {
         if ($this->session->userdata('logueado')) {
             $query['lista'] = $this->M_consultas->ListaUsuarios();
-            $this->load->view('Captura_Usuario',$query);
+            $this->load->view('Captura_Usuario', $query);
         } else {
             redirect('', 'refresh');
         }
@@ -57,6 +58,42 @@ class Panel extends CI_Controller
         } else {
             redirect('', 'refresh');
         }
+    }
+
+    public function buscar()
+    {
+        $buscar = $this->input->post('valorBusqueda');
+        if ($buscar == '') {
+            echo 'Vacio';
+        } else {
+            $query = $this->M_consultas->buscarProd($buscar);
+
+            echo '
+                    <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Codigo Producto</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Accion</th>
+            </tr>
+          </thead>
+          <tbody>';
+            foreach ($query->result() as $key) {
+                echo '
+                        <tr>
+                        <th scope="row">' . $key->P_CodeProduct . '</th>
+                        <td>' . $key->P_Description . '</td>
+                        <td>' . $key->P_Description . '</td>
+                      </tr>
+                        ';
+            }
+
+            echo '
+                    </tbody>
+                  </table>
+                    ';
+        }
+
     }
 
 }
