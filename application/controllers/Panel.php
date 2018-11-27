@@ -5,6 +5,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Panel extends CI_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('M_consultas');
+        $this->load->model('M_Altas');
+    }
     public function index()
     {
         if ($this->session->userdata('logueado') && $this->session->userdata('nivel_user') == 1) {
@@ -35,17 +41,16 @@ class Panel extends CI_Controller
     }
     public function Usuarios()
     {
-        if ($this->session->userdata('logueado') && $this->session->userdata('nivel_user') == 1) {
-
-        } elseif ($this->session->userdata('logueado')) {
-            redirect('Panel/Captura', 'refresh');
+        if ($this->session->userdata('logueado')) {
+            $query['lista'] = $this->M_consultas->ListaUsuarios();
+            $this->load->view('Captura_Usuario',$query);
         } else {
             redirect('', 'refresh');
         }
     }
     public function Supervisor()
     {
-        if ($this->session->userdata('logueado') && ($this->session->userdata('nivel_user') == 2 || $this->session->userdata('nivel_user') == 1)) {
+        if ($this->session->userdata('logueado')) {
 
         } elseif ($this->session->userdata('logueado')) {
             redirect('Panel/Captura', 'refresh');

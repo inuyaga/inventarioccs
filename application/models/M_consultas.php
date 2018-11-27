@@ -14,6 +14,13 @@ class M_consultas extends CI_Model
 
     }
 
+    public function ListaUsuarios()
+    {
+        $this->db->select('*');
+        $this->db->from('iccs_user');
+        return $this->db->get();
+
+    }
 }
 
 /* End of file M_consultas.php */
