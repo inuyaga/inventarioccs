@@ -126,15 +126,15 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Panel</a>
+        <!-- <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Panel</a> -->
         <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" method="POST" action="<?= base_url('Panel/SupervisorFilter') ?>">
           <div class="form-group mb-0">
             <div class="input-group input-group-alternative">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-search"></i></span>
               </div>
-              <input class="form-control" placeholder="Buscar" type="text">
+              <input class="form-control" placeholder="Buscar por código" type="text" name="filtro">
             </div>
           </div>
         </form>
@@ -179,81 +179,22 @@
     </div>
 
   <form role="form" action="<?= base_url('Welcome/GuardarUsuario') ?>" method="POST">
-    <div class="form-group mb-3">
-      <div class="input-group input-group-alternative">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-        </div>
-        <input class="form-control" placeholder="Usuario" name="usuario" type="text" required>
-      </div>
-    </div>
-    <div class="form-group mb-3">
-      <div class="input-group input-group-alternative">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-        </div>
-        <input class="form-control" placeholder="Nombre Completo de Usuario" name="usuario2" type="text" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group input-group-alternative">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-        </div>
-        <input class="form-control" placeholder="Contraseña" name="pass" type="password" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group input-group-alternative">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-        </div>
-        <input class="form-control" placeholder="Repite la Contraseña" name="repass" type="password" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group input-group-alternative">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-        </div>
-        <select name="Tipo" id="Tipo">
-          <option value="1">Administrador</option>
-          <option value="2">Supervisor</option>
-          <option value="3">Capturista</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="text-center">
-      <button type="submit" class="btn btn-primary my-4">Guardar cambios</button>
-    </div>
-    <?php
-    if(isset($_SESSION['mensajes_form']) && !empty($_SESSION['mensajes_form']))
-    {
-  ?>
-  <h2><?= $_SESSION['mensajes_form'] ?></h2>
-  <?php
-    }
-
-  ?>
     <div class="pb-8 pt-5 pt-md-8">
         <table class="table table-striped">
           <thead>
             <tr>
-              <td><b>Usuario</b></td>
-              <td><b>Nombre</b></td>
-              <td><b>Contraseña</b></td>
-              <td><b>Nivel</b></td>
+              <td><b>Código</b></td>
+              <td><b>Descripción</b></td>
+              <td><b>Conteo Actual</b></td>
             </tr>
           </thead>  
           <?php
           foreach ($lista->result() as $key => $data) {
           ?>
           <tr>
-            <td><?= $data->user_usuario ?></td>
-            <td><?= $data->user_nombre ?></td>
-            <td><?= $data->user_pass ?></td>
-            <td><?= $data->user_nivel ?></td>
+            <td><?= $data->P_CodeProduct ?></td>
+            <td><?= $data->P_Description ?></td>
+            <td><?= $data->ConteoT ?></td>
           </tr>
           <?php
         }

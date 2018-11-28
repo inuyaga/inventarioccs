@@ -49,7 +49,7 @@
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg">
+                <!-- <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg">ç -->
               </span>
             </div>
           </a>
@@ -161,6 +161,41 @@
       </div>
     </div>
 
+    <div class="form-group mb-3">
+      <div class="input-group input-group-alternative">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+        </div>
+        <input value="000-101-001" class="form-control" placeholder="Código de producto" name="Cproducto" id="Cproducto"  type="text" maxlength="11" minlength="0">
+      </div>
+    </div>
+
+    <div id="dibujador">
+<table class="table table-striped" >
+          <thead>
+            <tr>
+              <td><b>Código</b></td>
+              <td><b>Descripción</b></td>
+              <td><b>Crescendo</b></td>
+              <td><b>Conteo Actual</b></td>
+              <td><b>Diferencia</b></td>
+            </tr>
+          </thead>  
+          <?php
+          foreach ($lista->result() as $key => $data) {
+          ?>
+          <tr>
+            <td><?= $data->P_CodeProduct ?></td>
+            <td><?= $data->P_Description ?></td>
+            <td><?= $data->Exis ?></td>
+            <td><?= $data->ConteoT ?></td>
+            <td><?= $data->Diferencia ?></td>
+          </tr>
+          <?php
+        }
+          ?>
+        </table>
+      </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
@@ -171,6 +206,47 @@
   <script src="<?=base_url('publico')?>/assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="<?=base_url('publico')?>/assets/js/argon.js?v=1.0.0"></script>
+  <script>
+    $(document).ready(function(){
+      setInterval(function(){
+      var pintar= document.getElementById('dibujador');
+      var caja=document.getElementById('Cproducto').value;
+      var base_url=window.location.origin;
+      $.ajax({
+              url: base_url+"/Panel/test",
+              type: "post",
+              data:{ 'caja':caja },
+              dataType:'html',
+              beforeSend: function (jqXHR, settings) {
+                  var self = this;
+                  var xhr = settings.xhr;
+                  settings.xhr = function () {
+                      var output = xhr();
+                      output.onreadystatechange = function () {
+                          if (typeof(self.readyStateChanged) == "function") {
+                              self.readyStateChanged(this);
+                          }
+                      };
+                      return output;
+                  };
+              },
+              readyStateChanged: function (xhr) {
+                  if (xhr.readyState < 4) {
+                      pintar.innerHTML='<div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="sr-only">60% Complete</span></div></div>';
+                  }
+              },
+              success: function(data){
+                  pintar.innerHTML=data;
+              },
+              error: function(data) {
+                  pintar.innerHTML=data[0];
+                  
+              }       
+          });
+
+      },3500);
+    });
+  </script>
 </body>
 
 </html>

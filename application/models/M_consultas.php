@@ -19,7 +19,31 @@ class M_consultas extends CI_Model
         $this->db->select('*');
         $this->db->from('iccs_user');
         return $this->db->get();
+    }
 
+    public function ListaSupervisor()
+    {
+        $this->db->select('P_CodeProduct,P_Description, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT ',false);
+        $this->db->from('Productos');
+        $this->db->where('P_CantidadCapturado >',0);
+        return $this->db->get();
+    }
+
+    public function ListaAdministrador()
+    {
+        $this->db->select('P_CodeProduct,P_Description, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT,P_Apartado + P_Existencia as Exis,(P_Apartado + P_Existencia) - (P_Conteo1 + P_Conteo2 + P_Conteo3) as Diferencia ',false);
+        $this->db->from('Productos');
+        $this->db->where('P_CantidadCapturado >',0);
+        return $this->db->get();
+    }
+
+    public function ListaSupervisorF($busqueda)
+    {
+        $this->db->select('P_CodeProduct,P_Description, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT ',false);
+        $this->db->from('Productos');
+        $this->db->where('P_CodeProduct', $busqueda);
+        $this->db->where('P_CantidadCapturado >',0);
+        return $this->db->get();
     }
 
     public function buscarProd($busqueda)

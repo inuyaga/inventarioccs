@@ -15,7 +15,8 @@ class Panel extends CI_Controller
     public function index()
     {
         if ($this->session->userdata('logueado') && $this->session->userdata('nivel_user') == 1) {
-            $this->load->view('panel');
+            $query['lista'] = $this->M_consultas->ListaAdministrador();
+            $this->load->view('panel', $query);
         } elseif ($this->session->userdata('logueado')) {
             redirect('Panel/Captura', 'refresh');
         } else {
@@ -53,10 +54,51 @@ class Panel extends CI_Controller
     public function Supervisor()
     {
         if ($this->session->userdata('logueado')) {
-            $query['lista'] = $this->M_consultas->ListaUsuarios();
+            $query['lista'] = $this->M_consultas->ListaSupervisor();
             $this->load->view('Lista_Supervisor', $query);
+        }else{ 
             redirect('', 'refresh');
         }
+    }
+
+    public function SupervisorFilter()
+    {
+        if ($this->session->userdata('logueado')) {
+            $query['lista'] = $this->M_consultas->ListaSupervisorF($this->input->post('filtro'));
+            $this->load->view('Lista_Supervisor', $query);
+        }else{ 
+            redirect('', 'refresh');
+        }
+    }
+
+    public function FiltroAdmin()
+    {
+    $informacion=$this->M_consultas->ListaAdministrador($_POST['caja']);
+    echo <<<EOT
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <td><b>Código</b></td>
+              <td><b>Descripción</b></td>
+              <td><b>Crescendo</b></td>
+              <td><b>Conteo Actual</b></td>
+              <td><b>Diferencia</b></td>
+            </tr>
+          </thead>
+          <tbody>
+EOT;
+foreach ($informacion->result() as $key => $data) {
+    ?>
+        <tr>
+            <td><?= $data->P_CodeProduct ?></td>
+            <td><?= $data->P_Description ?></td>
+            <td><?= $data->Exis ?></td>
+            <td><?= $data->ConteoT ?></td>
+            <td><?= $data->Diferencia ?></td>
+          </tr>
+<?php
+}
+echo "</tbody></table>";
     }
 
     public function buscar()
