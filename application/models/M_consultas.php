@@ -29,12 +29,30 @@ class M_consultas extends CI_Model
         return $this->db->get();
     }
 
-    public function ListaAdministrador()
+    public function ListaAdministrador($cCprod)
     {
-        $this->db->select('P_CodeProduct,P_Description, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT,P_Apartado + P_Existencia as Exis,(P_Apartado + P_Existencia) - (P_Conteo1 + P_Conteo2 + P_Conteo3) as Diferencia ', false);
+        $this->db->select('P_CodeProduct,P_Description,P_Conteo1,P_Conteo2,P_Conteo3, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT,P_Apartado + P_Existencia as Exis,(P_Apartado + P_Existencia) - (P_Conteo1 + P_Conteo2 + P_Conteo3) as Diferencia ', false);
         $this->db->from('Productos');
         $this->db->where('P_CantidadCapturado >', 0);
-        return $this->db->get();
+        $this->db->where('P_CodeProduct', $cCprod);
+        $Var=$this->db->get();
+        $datos=array(
+        'conteo' => $Var->num_rows(),
+        'datos' => $Var    
+        );
+		return $datos;
+    }
+    public function ListaAdministrador2()
+    {
+        $this->db->select('P_CodeProduct,P_Description,P_Conteo1,P_Conteo2,P_Conteo3, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT,P_Apartado + P_Existencia as Exis,(P_Apartado + P_Existencia) - (P_Conteo1 + P_Conteo2 + P_Conteo3) as Diferencia ', false);
+        $this->db->from('Productos');
+        $this->db->where('P_CantidadCapturado >', 0);
+        $Var=$this->db->get();
+        $datos=array(
+        'conteo' => $Var->num_rows(),
+        'datos' => $Var    
+        );
+		return $datos;
     }
 
     public function ListaSupervisorF($busqueda)
