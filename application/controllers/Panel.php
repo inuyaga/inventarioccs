@@ -10,6 +10,7 @@ class Panel extends CI_Controller
         parent::__construct();
         $this->load->model('M_consultas');
         $this->load->model('M_Altas');
+        $this->load->model('M_update');
     }
     public function index()
     {
@@ -72,7 +73,12 @@ class Panel extends CI_Controller
             <tr>
               <th scope="col">Codigo Producto</th>
               <th scope="col">Descripcion</th>
-              <th scope="col">Accion</th>
+              <th scope="col">Localizacion</th>
+              <th scope="col">Unidad</th>
+              <th scope="col">Resguardo</th>
+              <th scope="col">Resguardo</th>
+              <th scope="col">Piking</th>
+              <th scope="col">Otros</th>
             </tr>
           </thead>
           <tbody>';
@@ -81,7 +87,12 @@ class Panel extends CI_Controller
                         <tr>
                         <th scope="row">' . $key->P_CodeProduct . '</th>
                         <td>' . $key->P_Description . '</td>
-                        <td>' . $key->P_Description . '</td>
+                        <td>' . $key->P_Localizacion . '</td>
+                        <td>' . $key->P_Unidad . '</td>
+                        <td>' . $key->P_Resguardo . '</td>
+                        <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/captura_prod/') . $key->P_CodeProduct . '" role="button">Resguardo</a></td>
+                        <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/capt_pikin/') . $key->P_CodeProduct . '" role="button">Piking</a></td>
+                        <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/capt_otros/') . $key->P_CodeProduct . '" role="button">Otros</a></td>
                       </tr>
                         ';
             }
@@ -91,6 +102,83 @@ class Panel extends CI_Controller
                   </table>
                     ';
         }
+
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////
+    public function captura_prod($id)
+    {
+        if ($this->session->userdata('logueado')) {
+            $data['id'] = trim($id);
+            $this->load->view('captura_real', $data);
+
+        } else {
+            redirect('', 'refresh');
+        }
+    }
+
+    public function set_caprura_prod()
+    {
+        $id = trim($this->input->post('id'));
+        $conteo1 = $this->input->post('conteo1');
+
+        $totalinicial = $this->M_consultas->totalinicial($id);
+        $catidadCapturado = $this->M_consultas->catidadCapturado($id);
+
+        $this->M_update->set_conteo($id, $conteo1, $totalinicial, $catidadCapturado);
+
+        redirect('Panel/Captura', 'refresh');
+
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public function capt_pikin($id)
+    {
+        if ($this->session->userdata('logueado')) {
+            $data['id'] = trim($id);
+            $this->load->view('captura_piking', $data);
+
+        } else {
+            redirect('', 'refresh');
+        }
+    }
+
+    public function set_caprura_prod_piking()
+    {
+        $id = trim($this->input->post('id'));
+        $conteo1 = $this->input->post('conteo1');
+
+        $totalinicial = $this->M_consultas->totalinicial_piking($id);
+        $catidadCapturado = $this->M_consultas->catidadCapturado_piking($id);
+
+        $this->M_update->set_conteo_piking($id, $conteo1, $totalinicial, $catidadCapturado);
+
+        redirect('Panel/Captura', 'refresh');
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public function capt_otros($id)
+    {
+        if ($this->session->userdata('logueado')) {
+            $data['id'] = trim($id);
+            $this->load->view('captura_otros', $data);
+
+        } else {
+            redirect('', 'refresh');
+        }
+    }
+
+    public function set_caprura_prod_otros()
+    {
+        $id = trim($this->input->post('id'));
+        $conteo1 = $this->input->post('conteo1');
+
+        $totalinicial = $this->M_consultas->totalinicial_otros($id);
+        $catidadCapturado = $this->M_consultas->catidadCapturado_otros($id);
+
+        $this->M_update->set_conteo_otros($id, $conteo1, $totalinicial, $catidadCapturado);
+
+        redirect('Panel/Captura', 'refresh');
 
     }
 
