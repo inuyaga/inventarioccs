@@ -44,7 +44,7 @@ class Panel extends CI_Controller
     }
     public function Usuarios()
     {
-        if ($this->session->userdata('logueado')) {
+        if ($this->session->userdata('logueado') && $this->session->userdata('nivel_user') == 1) {
             $query['lista'] = $this->M_consultas->ListaUsuarios();
             $this->load->view('Captura_Usuario', $query);
         } else {
@@ -53,10 +53,10 @@ class Panel extends CI_Controller
     }
     public function Supervisor()
     {
-        if ($this->session->userdata('logueado')) {
+        if ($this->session->userdata('logueado') && ($this->session->userdata('nivel_user') == 1 || $this->session->userdata('nivel_user') == 2)) {
             $query['lista'] = $this->M_consultas->ListaSupervisor();
             $this->load->view('Lista_Supervisor', $query);
-        }else{ 
+        } else {
             redirect('', 'refresh');
         }
     }
@@ -66,17 +66,18 @@ class Panel extends CI_Controller
         if ($this->session->userdata('logueado')) {
             $query['lista'] = $this->M_consultas->ListaSupervisorF($this->input->post('filtro'));
             $this->load->view('Lista_Supervisor', $query);
-        }else{ 
+        } else {
             redirect('', 'refresh');
         }
     }
 
     public function FiltroAdmin()
     {
-    $informacion=$this->M_consultas->ListaAdministrador($_POST['caja']);
-    echo <<<EOT
-    <table class="table table-striped">
-        <thead>
+        $informacion = $this->M_consultas->ListaAdministrador($_POST['caja']);
+        echo <<<EOT
+        <div class="table-responsive">
+    <table class="table align-items-center">
+        <thead class="thead-light">
             <tr>
               <td><b>Código</b></td>
               <td><b>Descripción</b></td>
@@ -87,18 +88,18 @@ class Panel extends CI_Controller
           </thead>
           <tbody>
 EOT;
-foreach ($informacion->result() as $key => $data) {
-    ?>
+        foreach ($informacion->result() as $key => $data) {
+            ?>
         <tr>
-            <td><?= $data->P_CodeProduct ?></td>
-            <td><?= $data->P_Description ?></td>
-            <td><?= $data->Exis ?></td>
-            <td><?= $data->ConteoT ?></td>
-            <td><?= $data->Diferencia ?></td>
+            <td><?=$data->P_CodeProduct?></td>
+            <td><?=$data->P_Description?></td>
+            <td><?=$data->Exis?></td>
+            <td><?=$data->ConteoT?></td>
+            <td><?=$data->Diferencia?></td>
           </tr>
 <?php
 }
-echo "</tbody></table>";
+        echo "</tbody></table></div>";
     }
 
     public function buscar()
@@ -110,15 +111,17 @@ echo "</tbody></table>";
             $query = $this->M_consultas->buscarProd($buscar);
 
             echo '
-                    <table class="table">
-          <thead>
+            <div class="container">
+                    <table class="table align-items-center">
+          <thead class="thead-light">
             <tr>
               <th scope="col">Codigo Producto</th>
               <th scope="col">Descripcion</th>
+              <th scope="col">C. Barras</th>
               <th scope="col">Localizacion</th>
               <th scope="col">Unidad</th>
               <th scope="col">Resguardo</th>
-              <th scope="col">Resguardo</th>
+              <th scope="col">Reg</th>
               <th scope="col">Piking</th>
               <th scope="col">Otros</th>
             </tr>
@@ -129,19 +132,41 @@ echo "</tbody></table>";
                         <tr>
                         <th scope="row">' . $key->P_CodeProduct . '</th>
                         <td>' . $key->P_Description . '</td>
+                        <td>' . $key->P_Cbarras . '</td>
                         <td>' . $key->P_Localizacion . '</td>
                         <td>' . $key->P_Unidad . '</td>
-                        <td>' . $key->P_Resguardo . '</td>
-                        <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/captura_prod/') . $key->P_CodeProduct . '" role="button">Resguardo</a></td>
-                        <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/capt_pikin/') . $key->P_CodeProduct . '" role="button">Piking</a></td>
-                        <td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/capt_otros/') . $key->P_CodeProduct . '" role="button">Otros</a></td>
-                      </tr>
-                        ';
+                        <td>' . $key->P_Resguardo . '</td>';
+
+                if ($key->P_Conteo1 == 0) {
+                    echo '<td>
+                    <a class="btn btn-primary btn-sm" href="' . base_url('Panel/captura_prod/') . $key->P_CodeProduct . '" role="button">Resguard</a>
+                    </td>
+                           ';
+                } else {echo '<td></td>';}
+                if ($key->P_Conteo2 == 0) {
+                    echo '<td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/capt_pikin/') . $key->P_CodeProduct . '" role="button">Piking</a></td>';
+
+                } else {echo '<td></td>';}
+                if ($key->P_Conteo3 == 0) {
+                    switch ($this->session->userdata('nivel_user')) {
+                        case 2:
+                            echo '<td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/capt_otros/') . $key->P_CodeProduct . '" role="button">Otros</a></td>';
+                            break;
+                        case 1:
+                            echo '<td><a class="btn btn-primary btn-sm" href="' . base_url('Panel/capt_otros/') . $key->P_CodeProduct . '" role="button">Otros</a></td>';
+                            break;
+                    }
+
+                } else {echo '<td></td>';}
+
+                echo '</tr>';
+
             }
 
             echo '
                     </tbody>
                   </table>
+                  </div>
                     ';
         }
 
@@ -214,11 +239,12 @@ echo "</tbody></table>";
     {
         $id = trim($this->input->post('id'));
         $conteo1 = $this->input->post('conteo1');
+        $descripcion_anexo = $this->input->post('descripcion_anexo');
 
         $totalinicial = $this->M_consultas->totalinicial_otros($id);
         $catidadCapturado = $this->M_consultas->catidadCapturado_otros($id);
 
-        $this->M_update->set_conteo_otros($id, $conteo1, $totalinicial, $catidadCapturado);
+        $this->M_update->set_conteo_otros($id, $conteo1, $totalinicial, $catidadCapturado, $descripcion_anexo);
 
         redirect('Panel/Captura', 'refresh');
 

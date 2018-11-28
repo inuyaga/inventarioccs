@@ -165,7 +165,7 @@
         <form action="<?= base_url('Panel/set_caprura_prod') ?>" method="POST">
             <div class="form-row">
                 <div class="col">
-                    <input type="text" class="form-control" name="conteo1" placeholder="Catidad encontrada" required>
+                    <input type="number" class="form-control" name="conteo1" placeholder="Catidad encontrada" required>
                 </div>
                 <div class="col">
                     <input type="text" class="form-control" name="id" name="id" value="<?= $id ?>" placeholder="Catidad encontrada"

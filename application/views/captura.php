@@ -70,12 +70,12 @@
         <!-- Collapse header -->
         <div class="navbar-collapse-header d-md-none">
           <div class="row">
-            <div class="col-6 collapse-brand">
+            <div class="col-4 collapse-brand">
               <a href="./index.html">
                 <img src="<?=base_url('publico/img/')?>computel.png">
               </a>
             </div>
-            <div class="col-6 collapse-close">
+            <div class="col-4 collapse-close">
               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main"
                 aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
                 <span></span>
@@ -85,7 +85,7 @@
           </div>
         </div>
         <!-- Form -->
-        <form class="mt-4 mb-3 d-md-none">
+        <form class="mt-3 mb-2 d-md-none">
           <div class="input-group input-group-rounded input-group-merge">
             <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Buscar"
               aria-label="Search">

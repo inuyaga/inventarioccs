@@ -77,7 +77,7 @@ class M_update extends CI_Model
 
     }
 
-    public function set_conteo_otros($id, $conteo, $totalinicia, $catidadCapturado)
+    public function set_conteo_otros($id, $conteo, $totalinicia, $catidadCapturado, $descripcion)
     {
 
         $this->db->trans_begin();
@@ -86,6 +86,7 @@ class M_update extends CI_Model
             'actualiza_clave_Producto' => $id,
             'actualiza_ID_User' => $this->session->userdata('ID'),
             'actualiza_Tipo' => 'OTROS',
+            'actualiza_descripcion_otros' => $descripcion,
         );
         $this->db->insert('actualizaciones_productos', $data);
 

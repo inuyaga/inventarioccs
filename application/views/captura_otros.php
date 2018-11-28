@@ -165,13 +165,21 @@
         <form action="<?=base_url('Panel/set_caprura_prod_otros')?>" method="POST">
             <div class="form-row">
                 <div class="col">
-                    <input type="text" class="form-control" name="conteo1" placeholder="Catidad encontrada" required>
+                    <label>Cantidad</label>
+                    <input type="number" class="form-control" name="conteo1" placeholder="Catidad encontrada" required>
                 </div>
                 <div class="col">
+                    <label>Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion_anexo" placeholder="Describa la ubicacion y comentarios"
+                        minlength="10" required>
+                </div>
+                <div class="col">
+                    <label>Codigo</label>
                     <input type="text" class="form-control" name="id" name="id" value="<?=$id?>" placeholder="Catidad encontrada"
                         readonly>
                 </div>
                 <div class="col">
+                    <br>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </div>

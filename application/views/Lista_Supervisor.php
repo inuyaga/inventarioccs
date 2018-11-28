@@ -51,10 +51,10 @@
           </a>
           <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
             <div class=" dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Bienvenido!<?=  $this->session->usuario ?></h6>
+              <h6 class="text-overflow m-0">Bienvenido!<?=$this->session->usuario?></h6>
             </div>
             <div class="dropdown-divider"></div>
-            <a href="<?= base_url('Panel/salir') ?>" class="dropdown-item">
+            <a href="<?=base_url('Panel/salir')?>" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Salir</span>
             </a>
@@ -95,22 +95,22 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel') ?>">
+            <a class="nav-link" href="<?=base_url('Panel')?>">
               <i class="ni ni-tv-2 text-primary"></i> Admin
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/captura') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/captura')?>">
               <i class="ni ni-pin-3 text-orange"></i> Captura
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/usuarios') ?>">
+            <a class="nav-link" href="<?=base_url('Panel/usuarios')?>">
               <i class="ni ni-single-02 text-yellow"></i> Usuarios
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<?= base_url('Panel/supervisor') ?>">
+          <li class="nav-item active">
+            <a class="nav-link" href="<?=base_url('Panel/supervisor')?>">
               <i class="ni ni-circle-08 text-pink"></i> Supervisor
             </a>
           </li>
@@ -126,18 +126,8 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <!-- <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Panel</a> -->
-        <!-- Form -->
-        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto" method="POST" action="<?= base_url('Panel/SupervisorFilter') ?>">
-          <div class="form-group mb-0">
-            <div class="input-group input-group-alternative">
-              <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-search"></i></span>
-              </div>
-              <input class="form-control" placeholder="Buscar por código" type="text" name="filtro">
-            </div>
-          </div>
-        </form>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" href="./index.html">Panel</a>
+
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
           <li class="nav-item dropdown">
@@ -148,7 +138,7 @@
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold">
-                    <?= $this->session->userdata('usuario') ?></span>
+                    <?=$this->session->userdata('usuario')?></span>
                 </div>
               </div>
             </a>
@@ -158,7 +148,7 @@
               </div>
 
               <div class="dropdown-divider"></div>
-              <a href="<?= base_url('Panel/salir') ?>" class="dropdown-item">
+              <a href="<?=base_url('Panel/salir')?>" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Salir!</span>
               </a>
@@ -169,8 +159,8 @@
     </nav>
 
 
-    <!-- Header -->
-    <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
+     <!-- Header -->
+     <div class="header bg-gradient-primary pb-1 pt-2 pt-md-7">
       <div class="container-fluid">
         <div class="header-body">
 
@@ -178,27 +168,33 @@
       </div>
     </div>
 
-  <form role="form" action="<?= base_url('Welcome/GuardarUsuario') ?>" method="POST">
+  <form role="form" action="<?=base_url('Welcome/GuardarUsuario')?>" method="POST">
     <div class="pb-8 pt-5 pt-md-8">
         <table class="table table-striped">
           <thead>
             <tr>
               <td><b>Código</b></td>
               <td><b>Descripción</b></td>
+              <td><b>Resguardo</b></td>
+              <td><b>Piking</b></td>
+              <td><b>Otros</b></td>
               <td><b>Conteo Actual</b></td>
             </tr>
-          </thead>  
+          </thead>
           <?php
-          foreach ($lista->result() as $key => $data) {
-          ?>
+foreach ($lista->result() as $key => $data) {
+    ?>
           <tr>
-            <td><?= $data->P_CodeProduct ?></td>
-            <td><?= $data->P_Description ?></td>
-            <td><?= $data->ConteoT ?></td>
+            <td><?=$data->P_CodeProduct?></td>
+            <td><?=$data->P_Description?></td>
+            <td><?=$data->P_Conteo1?></td>
+            <td><?=$data->P_Conteo2?></td>
+            <td><?=$data->P_Conteo3?></td>
+            <td><?=$data->ConteoT?></td>
           </tr>
           <?php
-        }
-          ?>
+}
+?>
         </table>
       </div>
   </form>
