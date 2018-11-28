@@ -213,7 +213,7 @@
       var caja=document.getElementById('Cproducto').value;
       var base_url=window.location.origin;
       $.ajax({
-              url: base_url+"/Panel/test",
+              url: base_url+"/Panel/FiltroAdmin",
               type: "post",
               data:{ 'caja':caja },
               dataType:'html',
