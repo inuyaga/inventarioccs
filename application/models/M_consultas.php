@@ -34,6 +34,65 @@ class M_consultas extends CI_Model
         return $this->db->get();
 
     }
+
+    public function totalinicial($id)
+    {
+        $this->db->select('P_Conteo1');
+        $this->db->from('Productos');
+        $this->db->where('P_CodeProduct', $id);
+
+        return $this->db->get()->result()[0]->P_Conteo1;
+
+    }
+    public function catidadCapturado($id)
+    {
+        $this->db->select('P_CantidadCapturado');
+        $this->db->from('Productos');
+        $this->db->where('P_CodeProduct', $id);
+
+        return $this->db->get()->result()[0]->P_CantidadCapturado;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////
+
+    public function totalinicial_piking($id)
+    {
+        $this->db->select('P_Conteo2');
+        $this->db->from('Productos');
+        $this->db->where('P_CodeProduct', $id);
+
+        return $this->db->get()->result()[0]->P_Conteo2;
+
+    }
+    public function catidadCapturado_piking($id)
+    {
+        $this->db->select('P_CantidadCapturado');
+        $this->db->from('Productos');
+        $this->db->where('P_CodeProduct', $id);
+
+        return $this->db->get()->result()[0]->P_CantidadCapturado;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    public function totalinicial_otros($id)
+    {
+        $this->db->select('P_Conteo3');
+        $this->db->from('Productos');
+        $this->db->where('P_CodeProduct', $id);
+
+        return $this->db->get()->result()[0]->P_Conteo3;
+
+    }
+
+    public function catidadCapturado_otros($id)
+    {
+        $this->db->select('P_CantidadCapturado');
+        $this->db->from('Productos');
+        $this->db->where('P_CodeProduct', $id);
+
+        return $this->db->get()->result()[0]->P_CantidadCapturado;
+    }
 }
 
 /* End of file M_consultas.php */
