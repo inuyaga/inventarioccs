@@ -52,10 +52,8 @@ class Panel extends CI_Controller
     public function Supervisor()
     {
         if ($this->session->userdata('logueado')) {
-
-        } elseif ($this->session->userdata('logueado')) {
-            redirect('Panel/Captura', 'refresh');
-        } else {
+            $query['lista'] = $this->M_consultas->ListaUsuarios();
+            $this->load->view('Lista_Supervisor', $query);
             redirect('', 'refresh');
         }
     }
