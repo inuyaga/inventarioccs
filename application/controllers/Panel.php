@@ -108,6 +108,153 @@ EOT;
         echo "</tbody></table></div>";
     }
 
+    public function ReporteCompletoExcel()
+    {
+        $this->load->library('excel');
+        $this->excel->getProperties()
+            ->setCreator("Comercializadora Computel del Sureste")
+            ->setLastModifiedBy("Admin")
+            ->setTitle("Orden de compra")
+            ->setSubject("Odc ")
+            ->setDescription("Ordenes de compra generados en el sistema web de ccs")
+            ->setKeywords("Excel Office 2007 openxml php")
+            ->setCategory("Excel Inv Ccs");
+            $BStyle = array(
+            'borders' => array(
+                'allborders' => array(
+                'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+            );
+        $product=$this->M_consultas->ListaAdministrador2();
+        $i=5;
+        foreach ($product['datos']->result() as $z => $row) {
+        $this->excel->setActiveSheetIndex(0)
+                                ->setCellValue('A4', 'Código')
+                                ->setCellValue('B4', 'Descripción')
+                                ->setCellValue('C4', 'Resguardo')
+                                ->setCellValue('D4', 'Picking')
+                                ->setCellValue('E4', 'Otros')
+                                ->setCellValue('F4', 'Conteo')
+                                ->setCellValue('G4', 'Crescendo')
+                                ->setCellValue('H4', 'Diferencia')
+
+                                ->setCellValue('A'.$i, $row->P_CodeProduct)
+                                ->setCellValue('B'.$i, $row->P_Description)
+                                ->setCellValue('C'.$i, $row->P_Conteo1)
+                                ->setCellValue('D'.$i, $row->P_Conteo2)
+                                ->setCellValue('E'.$i, $row->P_Conteo3)
+                                ->setCellValue('F'.$i, $row->ConteoT)
+                                ->setCellValue('G'.$i, $row->Exis)
+                                ->setCellValue('H'.$i, $row->Diferencia)
+                                ;
+                                $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setName('Arial');
+                                $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setSize(11);
+                                $this->excel->getActiveSheet()->getColumnDimensionByColumn($z)->setAutoSize(true);
+                                                
+        $i++;
+        }
+        $this->excel->getActiveSheet()->getStyle('A4:H4')->getFill()
+                            ->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID,
+                            'startcolor' => array('rgb' => '90caf9')
+                            ));
+        $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(false);
+        $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+        $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(false);
+        $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+        $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(false);
+        $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(10);
+        // $this->excel->getActiveSheet()->setAutoFilter("A4:G4");
+        $this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); 
+        $this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $this->excel->getActiveSheet()->setTitle('Inv');
+        $filename='InventarioCompleto.xls'; //save our workbook as this file name
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //mime type
+        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); 
+        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+        //if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+        $objWriter->save('php://output');
+    }
+
+    public function ReporteSegundoConteo()
+    {
+        $this->load->library('excel');
+        $this->excel->getProperties()
+            ->setCreator("Comercializadora Computel del Sureste")
+            ->setLastModifiedBy("Admin")
+            ->setTitle("Orden de compra")
+            ->setSubject("Odc ")
+            ->setDescription("Ordenes de compra generados en el sistema web de ccs")
+            ->setKeywords("Excel Office 2007 openxml php")
+            ->setCategory("Excel Inv Ccs");
+            $BStyle = array(
+            'borders' => array(
+                'allborders' => array(
+                'style' => PHPExcel_Style_Border::BORDER_THIN
+                )
+            )
+            );
+        $product=$this->M_consultas->ListaAdministrador3();
+        $i=5;
+        foreach ($product['datos']->result() as $z => $row) {
+        $this->excel->setActiveSheetIndex(0)
+                                ->setCellValue('A4', 'Código')
+                                ->setCellValue('B4', 'Descripción')
+                                ->setCellValue('C4', 'Resguardo')
+                                ->setCellValue('D4', 'Picking')
+                                ->setCellValue('E4', 'Otros')
+                                ->setCellValue('F4', 'Conteo')
+                                ->setCellValue('G4', 'Crescendo')
+                                ->setCellValue('H4', 'Diferencia')
+
+                                ->setCellValue('A'.$i, $row->P_CodeProduct)
+                                ->setCellValue('B'.$i, $row->P_Description)
+                                ->setCellValue('C'.$i, $row->P_Conteo1)
+                                ->setCellValue('D'.$i, $row->P_Conteo2)
+                                ->setCellValue('E'.$i, $row->P_Conteo3)
+                                ->setCellValue('F'.$i, $row->ConteoT)
+                                ->setCellValue('G'.$i, $row->Exis)
+                                ->setCellValue('H'.$i, $row->Diferencia)
+                                ;
+                                $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setName('Arial');
+                                $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setSize(11);
+                                $this->excel->getActiveSheet()->getColumnDimensionByColumn($z)->setAutoSize(true);
+                                                
+        $i++;
+        }
+        $this->excel->getActiveSheet()->getStyle('A4:H4')->getFill()
+                            ->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID,
+                            'startcolor' => array('rgb' => '90caf9')
+                            ));
+        $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(false);
+        $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+        $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(false);
+        $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(10);
+        $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(false);
+        $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(10);
+        // $this->excel->getActiveSheet()->setAutoFilter("A4:G4");
+        $this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); 
+        $this->excel->getActiveSheet()->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $this->excel->getActiveSheet()->setTitle('Inv');
+        $filename='InventarioCompleto.xls'; //save our workbook as this file name
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //mime type
+        header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
+        header('Cache-Control: max-age=0'); 
+        //save it to Excel5 format (excel 2003 .XLS file), change this to 'Excel2007' (and adjust the filename extension, also the header mime type)
+        //if you want to save it as .XLSX Excel 2007 format
+        $objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel5');  
+        $objWriter->save('php://output');
+    }
+
+    public function ActivarConteoDos($codeprod)
+    {
+        $this->M_update->ActualizarSegundoConteo($codeprod);
+        redirect('','refresh');
+        
+    }
+
     public function buscar()
     {
         $buscar = $this->input->post('valorBusqueda');
