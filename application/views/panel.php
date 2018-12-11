@@ -197,7 +197,7 @@
           </thead>  
           <?php
           foreach ($lista['datos']->result() as $key => $data) {
-            $porcentaje=number_format((($data->Exis-$data->ConteoT)/$data->Exis)*100,2,'.',',');
+            $porcentaje=number_format((($data->ConteoT-$data->Exis)/$data->ConteoT)*100,2,'.',',');
           ?>
           <tr>
             <td><?= $data->P_CodeProduct ?></td>
