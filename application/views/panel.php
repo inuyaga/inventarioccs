@@ -197,7 +197,11 @@
           </thead>  
           <?php
           foreach ($lista['datos']->result() as $key => $data) {
-            $porcentaje=number_format((($data->ConteoT-$data->Exis)/$data->ConteoT)*100,2,'.',',');
+            if($data->Exis == 0){
+              $porcentaje=0;
+            }else{
+              $porcentaje=number_format((($data->Exis-$data->ConteoT)/$data->Exis)*100,2,'.',',');
+            }
           ?>
           <tr>
             <td><?= $data->P_CodeProduct ?></td>
@@ -208,7 +212,7 @@
             <td><?= $data->ConteoT ?></td>
             <td><?= $data->Exis ?></td>
             <td><?= $data->Diferencia ?></td>
-            <td>103%</td>
+            <td><?= $porcentaje ?></td>
            <td align="center"><?php if($data->P_ParaConteoDos == 1){ echo "Activo"; }else{?><a type="button" href="<?= base_url('Panel/ActivarConteoDos/'.$data->P_CodeProduct) ?>" target="_blank">SI</a><?php } ?></td>
           </tr>
           <?php
