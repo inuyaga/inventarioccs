@@ -138,6 +138,8 @@ EOT;
                                 ->setCellValue('F4', 'Conteo')
                                 ->setCellValue('G4', 'Crescendo')
                                 ->setCellValue('H4', 'Diferencia')
+                                ->setCellValue('I4', 'Localización')
+                                ->setCellValue('J4', 'Resguardo')
 
                                 ->setCellValue('A'.$i, $row->P_CodeProduct)
                                 ->setCellValue('B'.$i, $row->P_Description)
@@ -147,6 +149,8 @@ EOT;
                                 ->setCellValue('F'.$i, $row->ConteoT)
                                 ->setCellValue('G'.$i, $row->Exis)
                                 ->setCellValue('H'.$i, $row->Diferencia)
+                                ->setCellValue('I'.$i, $row->P_Localizacion)
+                                ->setCellValue('J'.$i, $row->P_Resguardo)
                                 ;
                                 $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setName('Arial');
                                 $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setSize(11);
@@ -154,7 +158,7 @@ EOT;
                                                 
         $i++;
         }
-        $this->excel->getActiveSheet()->getStyle('A4:H4')->getFill()
+        $this->excel->getActiveSheet()->getStyle('A4:J4')->getFill()
                             ->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID,
                             'startcolor' => array('rgb' => '90caf9')
                             ));
@@ -208,6 +212,8 @@ EOT;
                                 ->setCellValue('F4', 'Conteo')
                                 ->setCellValue('G4', 'Crescendo')
                                 ->setCellValue('H4', 'Diferencia')
+                                ->setCellValue('I4', 'Localización')
+                                ->setCellValue('J4', 'Resguardo')
 
                                 ->setCellValue('A'.$i, $row->P_CodeProduct)
                                 ->setCellValue('B'.$i, $row->P_Description)
@@ -217,6 +223,8 @@ EOT;
                                 ->setCellValue('F'.$i, $row->ConteoT)
                                 ->setCellValue('G'.$i, $row->Exis)
                                 ->setCellValue('H'.$i, $row->Diferencia)
+                                ->setCellValue('I'.$i, $row->P_Localizacion)
+                                ->setCellValue('J'.$i, $row->P_Resguardo)
                                 ;
                                 $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setName('Arial');
                                 $this->excel->getActiveSheet()->getDefaultStyle()->getFont()->setSize(11);
@@ -224,7 +232,7 @@ EOT;
                                                 
         $i++;
         }
-        $this->excel->getActiveSheet()->getStyle('A4:H4')->getFill()
+        $this->excel->getActiveSheet()->getStyle('A4:J4')->getFill()
                             ->applyFromArray(array('type' => PHPExcel_Style_Fill::FILL_SOLID,
                             'startcolor' => array('rgb' => '90caf9')
                             ));

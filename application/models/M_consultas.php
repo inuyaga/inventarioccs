@@ -45,7 +45,7 @@ class M_consultas extends CI_Model
     }
     public function ListaAdministrador2()
     {
-        $this->db->select('P_CodeProduct,P_ParaConteoDos,P_Description,P_Conteo1,P_Conteo2,P_Conteo3, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT,P_Apartado + P_Existencia as Exis,(P_Apartado + P_Existencia) - (P_Conteo1 + P_Conteo2 + P_Conteo3) as Diferencia ', false);
+        $this->db->select('P_Resguardo,P_Localizacion,P_CodeProduct,P_ParaConteoDos,P_Description,P_Conteo1,P_Conteo2,P_Conteo3, P_Conteo1 + P_Conteo2 + P_Conteo3 as ConteoT,P_Apartado + P_Existencia as Exis,(P_Apartado + P_Existencia) - (P_Conteo1 + P_Conteo2 + P_Conteo3) as Diferencia ', false);
         $this->db->from('Productos');
         $this->db->where('P_CantidadCapturado >', 0);
         $this->db->order_by('P_CodeProduct', 'ASC');
