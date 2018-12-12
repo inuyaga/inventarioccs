@@ -186,9 +186,9 @@
               <td><b>Código</b></td>
               <td><b>Descripción</b></td>
               <td><b>Resguardo</b></td>
-              <td><b>*Resguardo</b></td>
+
               <td><b>Picking</b></td>
-              <td><b>*Picking</b></td>
+
               <td><b>Otros</b></td>
               <td><b>Conteo Actual</b></td>
               <td><b>Crescendo</b></td>
