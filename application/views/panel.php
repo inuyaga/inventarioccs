@@ -119,7 +119,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" >Capturado: <?= number_format(($lista['conteo']/53244)*100, 2, '.', ','); ?> %</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block" >Capturado: <?=number_format(($lista['conteo'] / 53244) * 100, 2, '.', ',');?> %</a>
 
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
@@ -166,8 +166,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="ni ni-email-83"></i></span>
         </div>
-        
-          
+
+
         <input value="" class="form-control" placeholder="Código de producto" name="Cproducto" id="Cproducto"  type="text" maxlength="11" minlength="0">
         <button type="button" onclick="Actualizador()">Buscar</button>
         <button type="button" onclick="refresh()">Actualizar Todo</button>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="progress">
-      <div class="progress-bar bg-info" role="progressbar" style="width: <?= number_format(($lista['conteo']/53244)*100, 2, '.', '') ?>%" aria-valuenow="<?= number_format(($lista['conteo']/53244)*100, 2, '', '') ?>" aria-valuemin="0" aria-valuemax="100"><?= number_format(($lista['conteo']/53244)*100, 2, '', '') ?></div>
+      <div class="progress-bar bg-info" role="progressbar" style="width: <?=number_format(($lista['conteo'] / 53244) * 100, 2, '.', '')?>%" aria-valuenow="<?=number_format(($lista['conteo'] / 53244) * 100, 2, '', '')?>" aria-valuemin="0" aria-valuemax="100"><?=number_format(($lista['conteo'] / 53244) * 100, 2, '', '')?></div>
     </div>
           <div id="dibujador">
 <table class="table table-striped" >
@@ -184,29 +184,33 @@
               <td><b>Código</b></td>
               <td><b>Descripción</b></td>
               <td><b>Resguardo</b></td>
+              <td><b>*Resguardo</b></td>
               <td><b>Picking</b></td>
+              <td><b>*Picking</b></td>
               <td><b>Otros</b></td>
               <td><b>Conteo Actual</b></td>
               <td><b>Crescendo</b></td>
-              <td><b>Diferencia</b></td>
+              <td><b>Diferencia</b></td> 
             </tr>
-          </thead>  
+          </thead>
           <?php
-          foreach ($lista['datos']->result() as $key => $data) {
-          ?>
+foreach ($lista['datos']->result() as $key => $data) {
+    ?>
           <tr>
-            <td><?= $data->P_CodeProduct ?></td>
-            <td><?= $data->P_Description ?></td>
-            <td><?= $data->P_Conteo1 ?></td>
-            <td><?= $data->P_Conteo2 ?></td>
-            <td><?= $data->P_Conteo3 ?></td>
-            <td><?= $data->ConteoT ?></td>
-            <td><?= $data->Exis ?></td>
-            <td><?= $data->Diferencia ?></td>
+            <td><?=$data->P_CodeProduct?></td>
+            <td><?=$data->P_Description?></td>
+            <td><?=$data->P_Conteo1?></td>
+            <td><?=$data->P_Resguardo?></td>
+            <td><?=$data->P_Conteo2?></td>
+            <td><?=$data->P_Localizacion?></td>
+            <td><?=$data->P_Conteo3?></td>
+            <td><?=$data->ConteoT?></td>
+            <td><?=$data->Exis?></td>
+            <td><?=$data->Diferencia?></td>
           </tr>
           <?php
-        }
-          ?>
+}
+?>
         </table>
       </div>
   </div>
@@ -252,8 +256,8 @@
               },
               error: function(data) {
                   pintar.innerHTML=data[0];
-                  
-              }       
+
+              }
           });
     }
 

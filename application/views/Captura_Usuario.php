@@ -213,6 +213,12 @@ if (isset($_SESSION['mensajes_form']) && !empty($_SESSION['mensajes_form'])) {
   <?php
 }
 
+$tipo_user = array(
+    '1' => 'Administrador',
+    '2' => 'Supervisor',
+    '3' => 'Capturista',
+);
+
 ?>
     <div class="pb-8 pt-5 pt-md-8">
         <table class="table table-striped">
@@ -231,7 +237,7 @@ foreach ($lista->result() as $key => $data) {
             <td><?=$data->user_usuario?></td>
             <td><?=$data->user_nombre?></td>
             <td><?=$data->user_pass?></td>
-            <td><?=$data->user_nivel?></td>
+            <td><?=$tipo_user[$data->user_nivel]?></td>
           </tr>
           <?php
 }
