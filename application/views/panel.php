@@ -171,6 +171,8 @@
         <input value="" class="form-control" placeholder="Código de producto" name="Cproducto" id="Cproducto"  type="text" maxlength="11" minlength="0">
         <button type="button" onclick="Actualizador()">Buscar</button>
         <button type="button" onclick="refresh()">Actualizar Todo</button>
+        <a type="button" href="<?=base_url('Panel/ReporteCompletoExcel')?>" target="_blank"">Excel Completo</a>
+        <a type="button" href="<?=base_url('Panel/ReporteSegundoConteo')?>" target="_blank"">Excel Conteo2</a>
       </div>
     </div>
 
@@ -190,23 +192,26 @@
               <td><b>Otros</b></td>
               <td><b>Conteo Actual</b></td>
               <td><b>Crescendo</b></td>
-              <td><b>Diferencia</b></td> 
+              <td><b>Diferencia</b></td>
+              <td><b>%</b></td>
+              <td><b>¿Para segundo conteo?</b></td>
             </tr>
           </thead>
           <?php
 foreach ($lista['datos']->result() as $key => $data) {
+    $porcentaje = number_format((($data->ConteoT - $data->Exis) / $data->ConteoT) * 100, 2, '.', ',');
     ?>
           <tr>
             <td><?=$data->P_CodeProduct?></td>
             <td><?=$data->P_Description?></td>
             <td><?=$data->P_Conteo1?></td>
-            <td><?=$data->P_Resguardo?></td>
             <td><?=$data->P_Conteo2?></td>
-            <td><?=$data->P_Localizacion?></td>
             <td><?=$data->P_Conteo3?></td>
             <td><?=$data->ConteoT?></td>
             <td><?=$data->Exis?></td>
             <td><?=$data->Diferencia?></td>
+            <td>103%</td>
+           <td align="center"><?php if ($data->P_ParaConteoDos == 1) {echo "Activo";} else {?><a type="button" href="<?=base_url('Panel/ActivarConteoDos/' . $data->P_CodeProduct)?>" target="_blank">SI</a><?php }?></td>
           </tr>
           <?php
 }

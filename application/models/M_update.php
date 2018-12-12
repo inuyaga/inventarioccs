@@ -114,6 +114,13 @@ class M_update extends CI_Model
 
     }
 
+    public function ActualizarSegundoConteo($pivote)
+    {
+        $this->db->set('P_ParaConteoDos', 1);
+        $this->db->where('P_CodeProduct', $pivote);
+        $this->db->update('Productos');
+    }
+
 }
 
 /* End of file M_update.php */
